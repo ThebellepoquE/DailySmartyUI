@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import thunk from 'redux-thunk';
-
 import reducers from './reducers';
 
- const createStoreWithMiddleware = applyMiddleware(thunk)(compose((window.devToolsExtension ? window.devToolsExtension() : f => f)()));
+// Crear store con thunk middleware
+const store = createStore(
+    reducers,
+    applyMiddleware(thunk)
+);
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './style/main.scss';
@@ -18,11 +20,12 @@ import Results from './components/results';
 
 function main() {
   ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
       <BrowserRouter>
         <Switch>
-            <Route path='/' component={Home}/>
+            <Route path='/' exact component={Home}/>
             <Route path='/results' component={Results}/>
+            
         </Switch>
       </BrowserRouter>
     </Provider>
