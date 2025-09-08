@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Logo from './logo';
+import SearchBar from './search-bar';
 
 class Results extends Component {
   render() {
