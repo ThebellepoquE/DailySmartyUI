@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import thunk from 'redux-thunk';
+
 import reducers from './reducers';
 
-// Crear store con thunk middleware
+const createStoreWithMiddleware = applyMiddleware(thunk)(compose((window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)));
+
 const store = createStore(
     reducers,
     applyMiddleware(thunk)
@@ -20,12 +23,11 @@ import Results from './components/results';
 
 function main() {
   ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={createStoreWithMiddleware(reducers)}>
       <BrowserRouter>
         <Switch>
             <Route path='/' exact component={Home}/>
             <Route path='/results' component={Results}/>
-            
         </Switch>
       </BrowserRouter>
     </Provider>
