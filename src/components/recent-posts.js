@@ -24,7 +24,6 @@ class RecentPosts extends Component {
     }
 
     render() {
-        console.log("RecentPosts props:", this.props);
         return (
             <div className="recent-posts">
                 <div className="recent-posts__wrapper">
