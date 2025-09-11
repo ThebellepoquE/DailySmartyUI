@@ -1,4 +1,7 @@
-import { SET_RECENT_POSTS } from './types';
+import { response } from 'express';
+import { SET_RECENT_POSTS,
+         SET_RESULTS_POSTS
+ } from './types';
 
 import axios from 'axios';
 
@@ -21,7 +24,7 @@ export function fetchRecentPosts() {
                 console.error('Error fetching posts:', error);
                 dispatch({ 
                     type: SET_RECENT_POSTS, 
-                    payload: [] 
+                    payload: response.data.posts 
                 });
             });
     }
@@ -32,10 +35,10 @@ export function fetchPostsWhithQuery(query) {
         axios.get(`https://jsonplaceholder.typicode.com/search?q=${query}`)
             .then(response => {
                 console.error('response.data.posts');
-                //dispatch({ 
-                   // type: SET_RECENT_POSTS, 
-                    //payload: [] 
-               // });
+                dispatch({ 
+                    type: SET_RESULTS_POSTS, 
+                    payload: response.data.posts 
+                });
             });
     }
 }
