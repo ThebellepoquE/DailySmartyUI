@@ -4,41 +4,18 @@ import axios from 'axios';
 
 export function fetchRecentPosts() {
     return function(dispatch) {
-        // Datos de prueba mientras la API no está disponible
-        const mockPosts = [
-            {
-                id: 1,
-                title: "Mi primer post",
-                content: "Este es un post de prueba"
-            },
-            {
-                id: 2,
-                title: "Aprendiendo React",
-                content: "React es una librería increíble"
-            },
-            {
-                id: 3,
-                title: "Redux en acción",
-                content: "Redux nos ayuda a manejar el estado"
-            }
-        ];
-
-        // Simulamos un delay como si fuera una llamada real
-        setTimeout(() => {
-            dispatch({
-                type: SET_RECENT_POSTS,
-                payload: mockPosts
-            });
-        }, 100);
-
-        // Mantenemos el código original comentado para cuando la API esté disponible
-        /*
-        axios.get('https://api.dailysmarty.com/posts')
+        axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
-                dispatch({ 
-                    type: SET_RECENT_POSTS, 
-                    payload: response.data.posts || [] 
+                const posts = response.data.map(post => {
+                    return {
+                        ...post,
+                        associated_topics: ['React', 'JavaScript']
+                    }
                 });
+                dispatch({
+                    type: SET_RECENT_POSTS,
+                    payload: posts
+                })
             })
             .catch(error => {
                 console.error('Error fetching posts:', error);
@@ -47,6 +24,18 @@ export function fetchRecentPosts() {
                     payload: [] 
                 });
             });
-        */
+    }
+}
+
+export function fetchPostsWhithQuery(query) {
+    return function(dispatch) {
+        axios.get(`https://jsonplaceholder.typicode.com/search?q=${query}`)
+            .then(response => {
+                console.error('response.data.posts');
+                //dispatch({ 
+                   // type: SET_RECENT_POSTS, 
+                    //payload: [] 
+               // });
+            });
     }
 }

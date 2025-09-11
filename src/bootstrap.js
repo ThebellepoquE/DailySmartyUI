@@ -8,8 +8,6 @@ import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(compose((window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)));
-
 const store = createStore(
     reducers,
     applyMiddleware(thunk)
@@ -23,7 +21,7 @@ import Results from './components/results';
 
 function main() {
   ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
       <BrowserRouter>
         <Switch>
             <Route path='/' exact component={Home}/>
