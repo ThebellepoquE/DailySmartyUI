@@ -14,6 +14,14 @@ module.exports = webpackMerge(webpackCommon, {
 
   devtool: 'eval-source-map',
   mode: 'development',
+  watchOptions: {
+    ignored: [
+      '**/DumpStack.log.tmp',
+      'node_modules/**'
+    ],
+    poll: 1000,
+    aggregateTimeout: 300
+  },
   output: {
     path: path.resolve(__dirname, '../static/dist'),
 

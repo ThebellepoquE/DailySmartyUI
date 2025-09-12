@@ -1,33 +1,60 @@
 # DailySmartyUI
 
-Este proyecto es parte del bootcamp de DevCamp, una réplica de la interfaz de usuario de DailySmarty.
+This project is a React/Redux/Router UI clone, originally built for the DevCamp bootcamp, now adapted to use a public API for learning and experimentation.
 
-## Agradecimientos
+## Acknowledgements
 
-Un especial agradecimiento a:
+- **Jordan Hudgens** and **DevCamp Bootcamp** ([Bottega Code School](https://bottega.tech/)) for their educational resources and guidance
+- **maxnerlson997** for valuable contributions and resources
+- The **Open Source Community** for making this project possible through their tools and libraries
 
-- **Jordan Hudgens** y **DevCamp Bootcamp** ([Bottega Code School](https://bottega.tech/)) por proporcionar una educación excepcional y guía en el desarrollo web
-- **maxnerlson997** por sus valiosas contribuciones y recursos
-- La **Comunidad Open Source** por hacer posible este proyecto a través de sus herramientas y librerías
+## Tech Stack
 
-## Tecnologías Utilizadas
-
-- React 16
-- Redux
-- React Router
-- Bootstrap 4
-- Webpack
-- SCSS
+- React 16.13.1
+- Redux 4
+- React Router 5
 - Redux Form
+- Bootstrap 4
+- SCSS (via `sass`)
+- Webpack 4 (custom config)
+- Axios (for API requests)
 
-## Proyecto Base
+## API
 
-Este proyecto está construido sobre js-builder, una base de código esqueleto para aplicaciones React/Redux/Router.
-*Basado en [es6-webpack2-starter](https://github.com/micooz/es6-webpack2-starter)*
+**Note:** The original DailySmarty API is no longer available. This project now uses [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as a mock API for posts and search functionality.
 
-## Licencia
+## Developer Workflow
+
+### Install dependencies
+
+```
+npm install
+```
+
+### Start development server
+
+```
+npm start
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000)
+
+### Build for production
+
+```
+npm run build
+```
+
+## Troubleshooting
+
+- If you see `EBUSY: resource busy or locked, lstat 'C:\\DumpStack.log.tmp'`, this is a Windows/webpack warning and can be ignored if the app works.
+- If you see `Can't resolve 'fs'` or similar, make sure you do **not** import Node.js modules (like `express`, `fs`, `destroy`) in your React/Redux code.
+- If you see dependency errors with `node-sass`, use `sass` instead (already configured).
+
+## License
 
 MIT
 
 ---
-*Este proyecto es parte de un proceso educativo y está destinado a fines de aprendizaje.*
+
+_This project is for educational purposes only._
