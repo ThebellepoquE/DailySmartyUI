@@ -29,14 +29,28 @@ export function fetchRecentPosts() {
     }
 }
 
-export function fetchPostsWhithQuery(query) {
+export function fetchPostsWithQuery(query) {
     return function(dispatch) {
-        axios.get(`https://jsonplaceholder.typicode.com/search?q=${query}`)
+        axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
-                console.error('response.data.posts');
-                dispatch({ 
-                    type: SET_RESULTS_POSTS, 
-                    payload: response.data.posts 
+                // Filtra los posts por el query en el título o body
+                const filteredPosts = response.data.filter(post => {
+                    const q = query.toLowerCase();
+                    return post.title.toLowerCase().includes(q) || post.body.toLowerCase().includes(q);
+                }).map(post => ({
+                    ...post,
+                    associated_topics: ['React', 'JavaScript']
+                }));
+                dispatch({
+                    type: SET_RESULTS_POSTS,
+                    payload: filteredPosts
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching posts:', error);
+                dispatch({
+                    type: SET_RESULTS_POSTS,
+                    payload: []
                 });
             });
     }

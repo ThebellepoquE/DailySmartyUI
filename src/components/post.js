@@ -1,26 +1,46 @@
 import React, { Component } from 'react';
 
-class Post extends Component {
+import { connect } from 'react-redux';
 
-    renderTopics() {
-        let topics = this.props.associated_topics.map((topic, index) => {
-            return <span className="post-topic" key={index}>{topic}</span>
+import * as actions from '../actions';
+
+import Post from './post';
+
+class RecentPosts extends Component {
+
+    componentDidMount() {
+        this.props.fetchRecentPosts();
+    }
+
+    renderPosts = function() {
+        const posts = this.props.recentPosts.map((post, index) => {
+            if(index < 3) {
+                return (
+                    <Post type="recent" {...post} key={index}/>
+                )   
+            }
         })
-        return topics;
+        return posts
     }
 
     render() {
         return (
-            <li className="recent-post">
-                <div className="recent-post__title">
-                    {this.props.title}
+            <div className="recent-posts">
+                <div className="recent-posts__wrapper">
+                    <div className="recent-posts__heading">Recent Posts</div>
+                    <ul className="recent-posts__posts">
+                        {this.renderPosts()}
+                    </ul>
                 </div>
-                <div className="recent-post__topics">
-                    {this.renderTopics()}
-                </div>
-            </li>
+            </div>
         )
     }
 }
 
-export default Post;
+function mapStateToProps(state) {
+    return {
+        recentPosts: state.posts.recentPosts
+    }
+}
+
+export default connect(mapStateToProps, actions)(RecentPosts);
