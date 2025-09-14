@@ -13,6 +13,7 @@ class ResultsPosts extends Component {
     }
 
     render() {
+        console.log('[ResultsPosts] this.props.posts:', this.props.posts);
         return (
             <div className="results-posts">
                 <div className="results-posts__wrapper">

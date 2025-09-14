@@ -6,31 +6,30 @@ import { withRouter } from 'react-router-dom';
 class SearchBar extends Component {
 
     handleFormSubmit = function({query}) {
-        console.log('[SearchBar] handleFormSubmit called with:', query);
-        if (this.props.onSubmit) {
-            this.props.onSubmit(query);
-        } else {
-            console.warn('[SearchBar] onSubmit prop is missing!');
-        }
+        this.props.onSubmit(query);
     }
 
-    renderInput = (field) => {
-        return <input type="text" placeholder="Search DailySmarty" {...field.input} />
+    renderInput(field) {
+        return <input type="text" placeholder="&#xf002; Search DailySmarty" {...field.input} />
     }
 
     render() {
+
         const { handleSubmit } = this.props;
 
         return (
-            <form className="search-bar" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                <Field name="query" component={this.renderInput}/>
+            <form className={`search-bar search-bar__${this.props.page}`} onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+                <div className="search-bar__wrapper">
+                    <Field name="query" component={this.renderInput}/>
+                    <p>Press return to search</p>
+                </div>
             </form>
         )
     }
 }
 
 SearchBar = reduxForm({
-    form: 'searchBar'
+    form: 'search-bar'
 })(SearchBar);
 
 SearchBar = withRouter(SearchBar);

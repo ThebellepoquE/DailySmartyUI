@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+
 import Logo from './logo';
 import SearchBar from './search-bar';
 import RecentPosts from './recent-posts';
+import ErrorBoundary from './ErrorBoundary';
 
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -10,25 +12,20 @@ import * as actions from '../actions';
 class Home extends Component {
 
   handleSearchBarSubmit(query) {
-    console.log('[Home] handleSearchBarSubmit called with:', query);
     this.props.fetchPostsWithQuery(query);
-    if (this.props.history) {
-      console.log('[Home] history.push is available, navigating to /results');
-      this.props.history.push(`/results`);
-    } else {
-      console.warn('[Home] history prop is missing! Navigation will not work.');
-    }
+    this.props.history.push('/results');
   }
 
   render() {
+    console.log('Home render');
     return (
-      <div>
-        <div>
-          <Logo/>
-          <SearchBar onSubmit={(query) => this.handleSearchBarSubmit(query)}/>
-          <RecentPosts/>
-        </div>
-      </div>
+        <ErrorBoundary>
+          <div>
+            <Logo/>
+            <SearchBar onSubmit={(query) => this.handleSearchBarSubmit(query)}/>
+            <RecentPosts/>
+          </div>
+        </ErrorBoundary>
     );
   }
 }

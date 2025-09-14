@@ -1,4 +1,47 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
 
-.post-topic {
-    margin: 0 4px;
+.app-wrapper {
+    display: grid;
+    justify-content: center;
+}
+
+.logo-main,
+.recent-posts
+{
+    display: grid;
+    justify-items: center;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+$color-gray-one: #666666;
+$color-gray-two: #B3B3B3;
+$color-gray-three: #D8D8D8;
+$color-blue-one: #0079FF;
+
+.no-content {
+    color: $color-gray-one;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@import './mixin';
+@import './search-bar';
+@import './recent-posts';
+@import './post';
+@import './home';
+@import './results';
+
+
+.logo-main {
+    img {
+        width: 105px;
+        height: 105px;
+    }
 }

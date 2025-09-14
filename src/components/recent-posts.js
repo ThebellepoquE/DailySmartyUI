@@ -9,6 +9,7 @@ import Post from './post';
 class RecentPosts extends Component {
 
     componentDidMount() {
+        console.log('RecentPosts montado');
         this.props.fetchRecentPosts();
     }
 
@@ -24,6 +25,7 @@ class RecentPosts extends Component {
     }
 
     render() {
+        console.log('[RecentPosts] this.props.recentPosts:', this.props.recentPosts);
         return (
             <div className="recent-posts">
                 <div className="recent-posts__wrapper">
